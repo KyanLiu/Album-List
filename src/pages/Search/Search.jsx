@@ -15,6 +15,7 @@ const Search = () => {
     const [hasClicked, setHasClicked] = useState(false);
     const [displayDetails, setDisplayDetails] = useState([]);
 
+
     const handleClick = (value) => {
         setHasClicked(prev => {
             return !prev;
@@ -41,25 +42,24 @@ const Search = () => {
             })
             const data = searchResponse.data.albums.items;
             setAlbums(data);
-
         } catch (error) {
             console.error('Error fetching albums', error);
         }
     }
     const fetchTrackList = async (albumID) => {
         try {
-            const response = await axios.get(`https://api/spotify.com/v1/search/albums/${albumID}`, {
+            const response = await axios.get(`https://api.spotify.com/v1/albums/${albumID}`, {
                 headers: {
                     'Authorization': `Bearer ${ACCESS_TOKEN}`
                 }
             })
-            console.log(response.data.albums.items[0]);
-            return response.data.albums.items[0];
+            return response.data.tracks.items;
         }
         catch (error) {
             console.error('Error fetching album tracklist', error);
         }
     }
+
     useEffect(() => {
         const fetchApiKey = async () => {
             try {
@@ -83,8 +83,6 @@ const Search = () => {
         fetchApiKey();
     }, [])
 
-    fetchTrackList()
-
     return (
         <>
             <div className='pageContainer'>
@@ -100,7 +98,7 @@ const Search = () => {
                         return <AlbumSmallBox id={key} details={value} clicked={() => handleClick(value)} />
                     })}
                 </div>
-                    {hasClicked ? <AlbumDetails value={displayDetails} tracklist={() => fetchTrackList(displayDetails.id)} /> : null}
+                    {hasClicked ? <AlbumDetails value={displayDetails} tracklist={fetchTrackList} /> : null}
             </div>
         </>
     )

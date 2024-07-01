@@ -8,14 +8,38 @@
     border: 2px solid black;    
     border-radius: 8px;
     z-index: 1;
-    overflow: hidden;
 }
 .detailsImage {
-    width: 60%;
+    width: 50%;
     height: auto;
     position: absolute;
     right: 0;
     border-bottom: 2px solid black;
     border-left: 2px solid black;
     border-radius: 2px;
+    margin: 0;
+}
+.leftContainer {
+    width: 50%;
+    height: 100%;
+    margin: 0;
+    background-color: purple;
+    z-index: 1000;
+}
+.songTitle {
+    margin: 0 auto;
+}
+.artistList {
+
+}
+.songList {
+    border: none;
+    background-color: white;
+    width: 40%;
+    height: 50%;
+    margin: auto;
+    overflow-y: auto;
+
+    scrollbar-color: black;
+    scrollbar-width: thin;
 }
