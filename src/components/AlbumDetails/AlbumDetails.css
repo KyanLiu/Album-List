@@ -1,0 +1,21 @@
+.detailsContainer {
+    position: fixed;
+    left: 27%;
+    right: 27%;
+    top: 25%;
+    bottom: 25%;
+    background-color: #d2cac5;
+    border: 2px solid black;    
+    border-radius: 8px;
+    z-index: 1;
+    overflow: hidden;
+}
+.detailsImage {
+    width: 60%;
+    height: auto;
+    position: absolute;
+    right: 0;
+    border-bottom: 2px solid black;
+    border-left: 2px solid black;
+    border-radius: 2px;
+}

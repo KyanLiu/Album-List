@@ -4,6 +4,7 @@ import searchIcon from '../../assets/img/search-icon.png';
 import axios from 'axios';
 import { Buffer } from 'buffer';
 import AlbumSmallBox from '../../components/AlbumSmallBox/AlbumSmallBox';
+import AlbumDetails from '../../components/AlbumDetails/AlbumDetails';
 
 let ACCESS_TOKEN;
 
@@ -11,7 +12,15 @@ const Search = () => {
     const [inputValue, setInputValue] = useState('');
     const [albums, setAlbums] = useState([]);
     const [hasSearched, setHasSearched] = useState(false); // use this to determine where the search bar should be
+    const [hasClicked, setHasClicked] = useState(false);
+    const [displayDetails, setDisplayDetails] = useState([]);
 
+    const handleClick = (value) => {
+        setHasClicked(prev => {
+            return !prev;
+        });
+        setDisplayDetails(value);
+    }
     const handleChange = (event) => {
         setInputValue(event.target.value);
     }
@@ -22,15 +31,14 @@ const Search = () => {
         setHasSearched(true);
         try {
             const searchResponse = await axios.get('https://api.spotify.com/v1/search', {
-            params: {
-                q: inputValue,
-                type: 'album'
-            },
-            headers: {
-                'Authorization': `Bearer ${ACCESS_TOKEN}`
-            }
+                params: {
+                    q: inputValue,
+                    type: 'album'
+                },
+                headers: {
+                    'Authorization': `Bearer ${ACCESS_TOKEN}`
+                }
             })
-            console.log(searchResponse.data.albums.items);
             const data = searchResponse.data.albums.items;
             setAlbums(data);
 
@@ -38,24 +46,44 @@ const Search = () => {
             console.error('Error fetching albums', error);
         }
     }
-
-    useEffect(() => {
-        const fetchApiKey = async () => {
-            const response = await axios.get('http://localhost:5000/api/client-id');
-            const client_id = response.data.clientId, client_secret = response.data.clientSecret;
-            const authString = Buffer.from(`${client_id}:${client_secret}`).toString('base64');
-            const token = await axios.post('https://accounts.spotify.com/api/token', new URLSearchParams({
-                grant_type: 'client_credentials'
-            }), {
+    const fetchTrackList = async (albumID) => {
+        try {
+            const response = await axios.get(`https://api/spotify.com/v1/search/albums/${albumID}`, {
                 headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                    'Authorization': `Basic ${authString}`
+                    'Authorization': `Bearer ${ACCESS_TOKEN}`
                 }
             })
-            ACCESS_TOKEN = token.data.access_token;
+            console.log(response.data.albums.items[0]);
+            return response.data.albums.items[0];
+        }
+        catch (error) {
+            console.error('Error fetching album tracklist', error);
+        }
+    }
+    useEffect(() => {
+        const fetchApiKey = async () => {
+            try {
+                const response = await axios.get('http://localhost:5000/api/client-id');
+                const client_id = response.data.clientId, client_secret = response.data.clientSecret;
+                const authString = Buffer.from(`${client_id}:${client_secret}`).toString('base64');
+                const token = await axios.post('https://accounts.spotify.com/api/token', new URLSearchParams({
+                    grant_type: 'client_credentials'
+                }), {
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'Authorization': `Basic ${authString}`
+                    }
+                })
+                ACCESS_TOKEN = token.data.access_token;
+            }
+            catch (error) {
+                console.error('Error getting Access Key', error);
+            }
         }
         fetchApiKey();
     }, [])
+
+    fetchTrackList()
 
     return (
         <>
@@ -69,9 +97,10 @@ const Search = () => {
                 </div>
                 <div className='albumDisplay'>
                     {albums.map((value, key) => {
-                        return <AlbumSmallBox id={key} details={value} />
+                        return <AlbumSmallBox id={key} details={value} clicked={() => handleClick(value)} />
                     })}
                 </div>
+                    {hasClicked ? <AlbumDetails value={displayDetails} tracklist={() => fetchTrackList(displayDetails.id)} /> : null}
             </div>
         </>
     )
