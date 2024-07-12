@@ -21,9 +21,9 @@ const AlbumDetails = (props) => {
         <div className='detailsContainer'>
             <img src={props.value.images[0]?.url} className='detailsImage' alt={props.value.name}></img>
             <div className='leftContainer'>
-                <h1 className='songTitle'>{props.value.name}</h1>
+                <h1 className='albumDetailsTitle'>{props.value.name}</h1>
                 <h2 className='artistList'>{artistNames}</h2>
-                <h2>{props.value.type}</h2>
+                <h2 className='albumType'>{props.value.type}</h2>
                 <ol className='songList'>
                     {tracks.map((value, key) => {
                         return <li>{value.name}</li>

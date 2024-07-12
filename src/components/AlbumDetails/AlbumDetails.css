@@ -4,7 +4,7 @@
     right: 27%;
     top: 25%;
     bottom: 25%;
-    background-color: #d2cac5;
+    background-color: #808080;
     border: 2px solid black;    
     border-radius: 8px;
     z-index: 1;
@@ -23,14 +23,30 @@
     width: 50%;
     height: 100%;
     margin: 0;
-    background-color: purple;
-    z-index: 1000;
 }
-.songTitle {
-    margin: 0 auto;
+.albumDetailsTitle {
+    margin-top: 10%;
+    margin-bottom: 10%;
+    margin-left: 5%;
+    text-align: left;
+    font-size: 2.5rem;
+    color: white;
 }
 .artistList {
-
+    text-align: left;
+    margin-left: 5%;
+    color: #eeeeee;
+    font-size: 1.2rem;
+}
+.albumType {
+    border: 2px solid black;
+    border-radius: 25px;
+    background-color: white;
+    color: black;
+    padding: 5px;
+    margin: 15px auto;
+    text-align: center;
+    width: 32%;
 }
 .songList {
     border: none;
