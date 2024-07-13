@@ -1,6 +1,17 @@
+import './Home.css';
+import Login from '../../components/Login/Login';
+
 const Home = () => {
     return (
-        <h1>Hi</h1>
+        <>
+            <div className='pageContainer'>
+                <h1>Album Saver</h1>
+                <p>A new way to save albums...</p>
+                
+                <Login />
+
+            </div>
+        </>
     )
 }
 
