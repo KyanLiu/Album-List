@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import './Search.css';
 import searchIcon from '../../assets/img/search-icon.png';
 import axios from 'axios';
@@ -14,8 +14,13 @@ const Search = () => {
     const [hasSearched, setHasSearched] = useState(false); // use this to determine where the search bar should be
     const [hasClicked, setHasClicked] = useState(false);
     const [displayDetails, setDisplayDetails] = useState([]);
+    const albumPopUp = useRef(null);
 
-
+    const closeMenu = (event) => {
+        if(!albumPopUp.current?.contains(event.target)){
+            setHasClicked(false);
+        }
+    }
     const handleClick = (value) => {
         setHasClicked(prev => {
             return !prev;
@@ -81,6 +86,10 @@ const Search = () => {
             }
         }
         fetchApiKey();
+        document.addEventListener('mousedown', closeMenu);
+        return () => {
+            document.removeEventListener('mousedown', closeMenu);
+        }
     }, [])
 
     return (
@@ -98,7 +107,11 @@ const Search = () => {
                         return <AlbumSmallBox id={key} details={value} clicked={() => handleClick(value)} />
                     })}
                 </div>
-                    {hasClicked ? <AlbumDetails value={displayDetails} tracklist={fetchTrackList} /> : null}
+                    {hasClicked ? (
+                        <div ref={albumPopUp}>
+                            <AlbumDetails value={displayDetails} tracklist={fetchTrackList} />
+                        </div>
+                    ) : null}
             </div>
         </>
     )
