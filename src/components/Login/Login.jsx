@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import axios from 'axios';
 
 const Login = () => {
     const [name, setName] = useState('');
@@ -7,8 +8,8 @@ const Login = () => {
         event.preventDefault();
         //alert(`The name you entered was: ${name}`);
         try {
-            const response = await axios.post('/api/login', { name })
-            setToken(response.data.token);
+            const response = await axios.post('/api/auth/login', { name })
+            //setToken(response.data.token);
         } catch (error) {
             console.error("There was an error logging in", error);
         }
@@ -22,7 +23,6 @@ const Login = () => {
                 </label>
                 <input type='submit'></input>
             </form>
-
         </>
     )
 }
