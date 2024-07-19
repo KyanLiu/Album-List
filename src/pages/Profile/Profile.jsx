@@ -1,17 +1,19 @@
 import './Profile.css';
 import guestPicture from '../../assets/img/guest.png';
 import AlbumList from '../../components/AlbumList/AlbumList';
+import {useContext} from 'react';
+import {UserLogin} from '../../App';
 
 const Profile = () => {
-    const username = 'Sikelol';
+    const {loggedIn, setLoggedIn, username, setUsername} = useContext(UserLogin);
+    const profileUsername =  username || 'Sikelol';
     const profilePicture = '';
     const about = 'Hello :3';
     const joinDate = 'MM/DD/YY';
-
     return (
         <div className="profileContainer">
             <div className='profileAbout'>
-                <h1 className='profileUsername'>{username}</h1>
+                <h1 className='profileUsername'>{profileUsername}</h1>
                 <img src={guestPicture} className='imgProp'></img>
                 <div className='aboutTag'>
                     <p>{about}</p>

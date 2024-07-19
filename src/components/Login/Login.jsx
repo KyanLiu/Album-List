@@ -1,15 +1,15 @@
 import { useState } from 'react';
 import axios from 'axios';
 
-const Login = () => {
+const Login = (props) => {
     const [name, setName] = useState('');
-    const [token, setToken] = useState('');
     const handleSubmit = async (event) => {
         event.preventDefault();
-        //alert(`The name you entered was: ${name}`);
+        console.log(name);
+        props.setUser(name);
+        props.setLogin();
         try {
-            const response = await axios.post('/api/auth/login', { name })
-            //setToken(response.data.token);
+            const response = await axios.post('http://localhost:5000/api/auth/login', { name })
         } catch (error) {
             console.error("There was an error logging in", error);
         }
