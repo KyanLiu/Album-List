@@ -1,14 +1,17 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useContext } from 'react';
 import './Search.css';
 import searchIcon from '../../assets/img/search-icon.png';
 import axios from 'axios';
 import { Buffer } from 'buffer';
 import AlbumSmallBox from '../../components/AlbumSmallBox/AlbumSmallBox';
 import AlbumDetails from '../../components/AlbumDetails/AlbumDetails';
+import {UserLogin} from '../../App';
 
 let ACCESS_TOKEN;
 
 const Search = () => {
+    const {loggedIn, setLoggedIn, username, setUsername} = useContext(UserLogin);
+
     const [inputValue, setInputValue] = useState('');
     const [albums, setAlbums] = useState([]);
     const [hasSearched, setHasSearched] = useState(false); // use this to determine where the search bar should be
@@ -109,7 +112,7 @@ const Search = () => {
                 </div>
                     {hasClicked ? (
                         <div ref={albumPopUp}>
-                            <AlbumDetails value={displayDetails} tracklist={fetchTrackList} />
+                            <AlbumDetails value={displayDetails} tracklist={fetchTrackList} loggedIn={loggedIn} userInfo={username}/>
                         </div>
                     ) : null}
             </div>

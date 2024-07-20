@@ -59,3 +59,9 @@
     scrollbar-color: black;
     scrollbar-width: thin;
 }
+.addProfileBtn {
+    color: black;
+    border: 2px solid #ffd700;
+    border-radius: 10px;
+    cursor: pointer;
+}

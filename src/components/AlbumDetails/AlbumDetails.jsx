@@ -1,4 +1,5 @@
 import './AlbumDetails.css';
+import axios from 'axios';
 import { useState, useEffect } from 'react';
 
 const AlbumDetails = (props) => {
@@ -8,7 +9,7 @@ const AlbumDetails = (props) => {
         const fetchTracks = async () => {
             try {
                 const response = await props.tracklist(props.value.id);   
-                console.log(response);
+                //console.log(response);
                 setTracks(response);
             } catch (error) {
                 console.error('Error Calling Track List Function', error);
@@ -16,6 +17,14 @@ const AlbumDetails = (props) => {
         }
         fetchTracks();
     }, []);
+    const handleAddProfile = async () => {
+        //console.log(props.value);
+        try {
+            const response = await axios.post('http://localhost:5000/api/profile/add', {username: props.userInfo, albumId: props.value.id});
+        } catch (error) {
+            console.error('There was an error adding an album to the profile via backend', error);
+        }
+    }
 
     return (
         <div className='detailsContainer'>
@@ -29,6 +38,9 @@ const AlbumDetails = (props) => {
                         return <li>{value.name}</li>
                     })}
                 </ol>
+            { props.loggedIn ? (
+                <button className='addProfileBtn' onClick={handleAddProfile}>Add to Profile</button>
+            ) : null }
             </div>
         </div>
     )
