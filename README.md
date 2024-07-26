@@ -1,3 +1,7 @@
+Album-Save
+An Application to save albums to a profile, which can be viewed by other users. Features include searching for public albums, viewing album specifics such as tracklists, and viewing other profiles.
+
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
