@@ -9,6 +9,10 @@
     border-radius: 15px;
     display: flex;
 }
+.profileInner {
+    width: 100%;
+    height: 100%;
+}
 .profileAbout {
     width: 40%;
     height: auto;
