@@ -1,15 +1,12 @@
 import './AlbumSmallBox.css';
 
 const AlbumSmallBox = (props) => {
-    //const [hasClicked, setHasClicked] = useState(false);
-
-    //props.clicked? = function
-    
     const truncateString = (title) => {
+        console.log('Here', title);
         if(title.length <= 12) return title;
         return title.substring(0,10) + '...';
     }
-//() => setHasClicked(true)
+    
     return (
         <>
             <div className='album' onClick={props.clicked}>
