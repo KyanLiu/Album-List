@@ -6,29 +6,15 @@ import {UserLogin} from '../../App';
 import {Link} from 'react-router-dom';
 
 const Profile = () => {
-    const {loggedIn, setLoggedIn, username, setUsername} = useContext(UserLogin);
-    const profileUsername =  username || 'Sikelol';
-    const profilePicture = '';
+    const {loggedIn, setLoggedIn, username, setUsername, accessToken, setAccessToken} = useContext(UserLogin);
+    const profileUsername =  username;
     const about = 'Hello :3';
     const joinDate = 'MM/DD/YY';
 
-    /*const fetchTrackDetails = async (albumID) => {
-        try {
-            const response = await axios.get(`https://api.spotify.com/v1/albums/${albumID}`, {
-                headers: {
-                    'Authorization': `Bearer ${ACCESS_TOKEN}`
-                }
-            })
-            return response.data;
-        }
-        catch (error) {
-            console.error('Error fetching album tracklist', error);
-        }
-    }*/
     return (
         <div className="profileContainer">
             { loggedIn ? (
-                <div>
+                <>
                     <div className='profileAbout'>
                         <h1 className='profileUsername'>{profileUsername}</h1>
                         <img src={guestPicture} className='imgProp'></img>
@@ -42,9 +28,9 @@ const Profile = () => {
                     </div>
                     <div className='listContainer'>
                         <h1 className='listTitle'>Albums to listen to:</h1>
-                        <AlbumList />
+                        <AlbumList accessToken={accessToken} username={username} />
                     </div>
-                </div>
+                </>
             ) : (
                 <div>
                     <p>Please Login First</p>

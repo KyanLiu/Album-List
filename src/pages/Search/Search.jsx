@@ -2,15 +2,13 @@ import { useState, useEffect, useRef, useContext } from 'react';
 import './Search.css';
 import searchIcon from '../../assets/img/search-icon.png';
 import axios from 'axios';
-import { Buffer } from 'buffer';
 import AlbumSmallBox from '../../components/AlbumSmallBox/AlbumSmallBox';
 import AlbumDetails from '../../components/AlbumDetails/AlbumDetails';
 import {UserLogin} from '../../App';
 
-let ACCESS_TOKEN;
 
 const Search = () => {
-    const {loggedIn, setLoggedIn, username, setUsername} = useContext(UserLogin);
+    const {loggedIn, setLoggedIn, username, setUsername, accessToken, setAccessToken} = useContext(UserLogin);
 
     const [inputValue, setInputValue] = useState('');
     const [albums, setAlbums] = useState([]);
@@ -45,7 +43,7 @@ const Search = () => {
                     type: 'album'
                 },
                 headers: {
-                    'Authorization': `Bearer ${ACCESS_TOKEN}`
+                    'Authorization': `Bearer ${accessToken}`
                 }
             })
             const data = searchResponse.data.albums.items;
@@ -58,7 +56,7 @@ const Search = () => {
         try {
             const response = await axios.get(`https://api.spotify.com/v1/albums/${albumID}`, {
                 headers: {
-                    'Authorization': `Bearer ${ACCESS_TOKEN}`
+                    'Authorization': `Bearer ${accessToken}`
                 }
             })
             return response.data.tracks.items;
@@ -67,28 +65,12 @@ const Search = () => {
             console.error('Error fetching album tracklist', error);
         }
     }
+    const addedProfileAlert = () => {
+        setHasClicked(false);
+        alert('Album Added to Profile: ', username);
+    }
 
     useEffect(() => {
-        const fetchApiKey = async () => {
-            try {
-                const response = await axios.get('http://localhost:5000/api/client-id');
-                const client_id = response.data.clientId, client_secret = response.data.clientSecret;
-                const authString = Buffer.from(`${client_id}:${client_secret}`).toString('base64');
-                const token = await axios.post('https://accounts.spotify.com/api/token', new URLSearchParams({
-                    grant_type: 'client_credentials'
-                }), {
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                        'Authorization': `Basic ${authString}`
-                    }
-                })
-                ACCESS_TOKEN = token.data.access_token;
-            }
-            catch (error) {
-                console.error('Error getting Access Key', error);
-            }
-        }
-        fetchApiKey();
         document.addEventListener('mousedown', closeMenu);
         return () => {
             document.removeEventListener('mousedown', closeMenu);
@@ -112,7 +94,7 @@ const Search = () => {
                 </div>
                     {hasClicked ? (
                         <div ref={albumPopUp}>
-                            <AlbumDetails value={displayDetails} tracklist={fetchTrackList} loggedIn={loggedIn} userInfo={username}/>
+                            <AlbumDetails profileAlert={addedProfileAlert} value={displayDetails} tracklist={fetchTrackList} loggedIn={loggedIn} userInfo={username}/>
                         </div>
                     ) : null}
             </div>
