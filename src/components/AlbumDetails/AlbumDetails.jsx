@@ -9,7 +9,6 @@ const AlbumDetails = (props) => {
         const fetchTracks = async () => {
             try {
                 const response = await props.tracklist(props.value.id);   
-                //console.log(response);
                 setTracks(response);
             } catch (error) {
                 console.error('Error Calling Track List Function', error);
@@ -18,9 +17,9 @@ const AlbumDetails = (props) => {
         fetchTracks();
     }, []);
     const handleAddProfile = async () => {
-        //console.log(props.value);
         try {
             const response = await axios.post('http://localhost:5000/api/profile/add', {username: props.userInfo, albumId: props.value.id});
+            props.profileAlert();
         } catch (error) {
             console.error('There was an error adding an album to the profile via backend', error);
         }
