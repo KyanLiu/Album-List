@@ -11,7 +11,7 @@ const Navbar = () => {
             <Link to="/" className={hoverStyle('/') ? 'navItem active' : 'navItem'}>Home</Link>
             <Link to="/profile" className={hoverStyle('/profile') ? 'navItem active' : 'navItem'}>Profile</Link>
             <Link to="/search" className={hoverStyle('/search') ? 'navItem active' : 'navItem'}>Search</Link>
-            <Link to="/profile" className='navItem'>About</Link>
+            <Link to="/logout" className={hoverStyle('/logout') ? 'navItem active' : 'navItem'}>Log Out</Link>
         </div>
     )
 }
