@@ -1,8 +1,10 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const Login = (props) => {
     const [name, setName] = useState('');
+    const navigate = useNavigate();
     const handleSubmit = async (event) => {
         event.preventDefault();
         console.log(name);
@@ -10,6 +12,7 @@ const Login = (props) => {
         props.setLogin();
         try {
             const response = await axios.post('http://localhost:5000/api/auth/login', { name })
+            navigate('/profile');
         } catch (error) {
             console.error("There was an error logging in", error);
         }
