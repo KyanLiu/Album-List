@@ -1,6 +1,6 @@
-Album-Save
+**Album-Save**
 An Application to save albums to a profile, which can be viewed by other users. Features include searching for public albums, viewing album specifics such as tracklists, and viewing other profiles.
-
+[Backend Repository](https://github.com/SikeLolo/album-details-backend)
 
 # React + Vite
 
