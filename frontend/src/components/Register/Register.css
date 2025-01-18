@@ -1,0 +1,80 @@
+.registerDiv {
+    width: 100%;
+    min-width: 450px;
+    height: 100%;
+    padding: 64px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+.registerTitle {
+    font-size: 3rem;
+    text-align: left;
+    color: black;
+    margin: 0 0 20px 0;
+}
+.registerForm {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 100%;
+}
+.registerInputDiv {
+    width: 100%;
+
+}
+.registerInput {
+    background: none;
+    border: none;
+    border-bottom: 2px solid black;
+    padding: 10px;
+    margin: 14px 14px 14px 0;
+    width: 45%;
+    min-width: 250px;
+    font-size: 1.2rem;
+    transition: 0.3s;
+}
+.registerInput:focus {
+    outline: none;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+.registerButtonDiv {
+    width: 100%;
+    display: flex;
+    margin-top: 14px;
+}
+.registerButtonDiv button {
+    margin-right: 14px;
+    border-radius: 10px;
+    padding: 10px 30px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 1.2rem;
+}
+.register-submit-btn {
+    background-color: white;
+}
+.register-submit-btn:hover {
+    background-color: black;
+    color: white;
+}
+.register-login-btn {
+    border: none;
+    background: none;
+    text-decoration: underline;
+}
+.register-login-btn:hover {
+    background-color: black;
+    color: white;
+}
+
+@media screen and (max-width: 675px) {
+    .registerDiv {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+}

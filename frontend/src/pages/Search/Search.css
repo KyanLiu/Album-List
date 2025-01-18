@@ -1,0 +1,86 @@
+.searchContainer {
+    margin: 0 auto;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.searchContainerEnabled {
+    justify-content: flex-start;
+    height: 20%;
+}
+.searchTitle {
+    font-size: 3rem;
+}
+.searchBoxContainer {
+    margin: 0 auto;
+    width: 50%;
+    height: 5vh;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    align-items: center;
+    position: relative;
+}
+.searchInput {
+    margin-left: 20%;
+    width: 250px;
+    height: 40px;
+    padding: 8px 10px;
+    border: 2px solid black;
+    border-radius: 6px;
+    font-size: 1.2rem;
+    user-select: none;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+.searchFilter {
+
+}
+.searchFilter button {
+    background: none;
+    border: none;
+    font-size: 1rem;
+}
+.searchSelect {
+    text-decoration: underline;
+}
+.searchIcon {
+    width: 35px;
+    height: auto;
+    right: 17%;
+    top: 15%;
+    cursor: pointer;
+}
+
+
+.albumDisplay {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+    white-space: nowrap;
+}
+.displayBlur {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: rgba(7, 1, 1, 0.25);
+    backdrop-filter: blur(3px);
+    z-index: 2;
+}
+.userDispContainer {
+    position: fixed;
+    left: 27%;
+    right: 27%;
+    top: 25%;
+    bottom: 25%;
+    background-color: #808080;
+    border: 2px solid black;    
+    border-radius: 8px;
+    z-index: 3;
+}

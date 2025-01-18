@@ -1,0 +1,24 @@
+.album {
+    width: 200px;
+    height: 250px;
+    border: 2px solid black;
+    border-radius: 15px;
+    margin: 10px 0;
+    overflow: hidden;
+    cursor: pointer;
+    user-select: none;
+}
+.albumBox {
+    width: 196px;
+    height: auto;
+    margin: 0 auto;
+    border-bottom: 2px solid black;
+    pointer-events: none;
+}
+.albumTitle {
+    margin: 0;
+    font-size: 1.5rem;
+    padding: 0 5px;
+    overflow: hidden;
+    font-family: 'Roboto Mono', monospace;
+}
