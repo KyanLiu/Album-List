@@ -1,6 +1,15 @@
-**Album-Save**
-An Application to save albums to a profile, which can be viewed by other users. Features include searching for public albums, viewing album specifics such as tracklists, and viewing other profiles.
-[Backend Repository](https://github.com/SikeLolo/album-details-backend)
+**MyAlbumList**
+---
+Similar to the popular MyAnimeList platform, MyAlbumList is a web application that supports saving and rating albums to user profiles, which can be viewed by other users on the platform. 
+Features include:
+ -  Searching through public albums
+ -  Viewing album specifics such as tracklists and other album details
+ -  Viewing other user profiles to view their saved albums and their respective ratings.
+ -  Filtering through rated albums
+
+Built With
+---
+![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB) ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white) ![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB) ![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white) 
 
 # React + Vite
 
